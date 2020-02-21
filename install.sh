@@ -8,7 +8,7 @@ case "`uname -a`" in
    exit 2 ;;
 esac
 case "$1" in
---no-compile) exec pip3.7 install torch-1.4.0*.whl ;;
+--no-compile) exec pip3.7 install torch-1.4.0+cpu-py37-none-any.whl ;;
 esac
 PY_MAJOR_VERSION=3
 PYTORCH_BUILD_VERSION=1.4.0+cpu
