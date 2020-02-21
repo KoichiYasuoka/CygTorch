@@ -7,6 +7,10 @@ case "`uname -a`" in
 *) echo CygTorch is only for Cygwin64 >&2
    exit 2 ;;
 esac
+if [ -f /usr/bin/cygtorch_python.dll ]
+then echo CygTorch: already installed >&2
+     exit 2
+fi
 case "$1" in
 --no-compile) exec pip3.7 install torch-1.4.0+cpu-py37-none-any.whl ;;
 esac
