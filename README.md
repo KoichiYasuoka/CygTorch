@@ -8,7 +8,7 @@ See [PyTorch page](https://pytorch.org). CPU only.
 
 ## Installation
 
-Only for Cygwin64 with `python37-devel` `python37-pip` `python37-cython` `python37-numpy` `python37-wheel` `gcc-g++` and `git`:
+Only for Cygwin64 with `python37-devel` `python37-pip` `python37-cython` `python37-numpy` `gcc-g++` and `git`:
 
 ```sh
 cd /tmp
