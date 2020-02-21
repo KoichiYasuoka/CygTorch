@@ -3,7 +3,7 @@
 #   python37-devel python37-pip python37-cython python37-numpy python37-wheel
 #   gcc-g++ git make cmake
 case "`uname -a`" in
-'*x86_64 Cygwin') : ;;
+*'x86_64 Cygwin') : ;;
 *) echo CygTorch is only for Cygwin64 >&2
    exit 2 ;;
 esac
