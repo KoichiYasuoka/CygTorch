@@ -10,7 +10,7 @@ case "`uname -a`" in
 esac
 D=/tmp/allennlp-install$$
 mkdir $D
-pip3.7 install -U cython wheel pybind11 mecab-cygwin
+pip3.7 install -U cython wheel pybind11 greenlet mecab-cygwin
 pip3.7 install 'spacy>=2.2.2' --no-build-isolation
 pip3.7 install torch -f https://github.com/KoichiYasuoka/CygTorch
 pip3.7 install scipy@git+https://github.com/scipy/scipy
