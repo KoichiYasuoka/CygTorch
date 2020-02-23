@@ -8,6 +8,8 @@ case "`uname -a`" in
 *) echo Only for Cygwin64 >&2
    exit 2 ;;
 esac
+D=/tmp/allennlp-install$$
+mkdir $D
 pip3.7 install -U cython wheel pybind11 mecab-cygwin
 pip3.7 install 'spacy>=2.2.2' --no-build-isolation
 pip3.7 install torch -f https://github.com/KoichiYasuoka/CygTorch
@@ -15,14 +17,17 @@ pip3.7 install scipy@git+https://github.com/scipy/scipy
 pip3.7 list |
 ( if egrep '^sentencepiece '
   then :
-  else curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/sentencepiece.sh | sh -x
+  else cd $D
+       curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/sentencepiece.sh | sh -x
   fi
 )
 pip3.7 list |
 ( if egrep '^h5py '
   then :
-  else curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/h5py.sh | sh -x
+  else cd $D
+       curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/h5py.sh | sh -x
   fi
 )
 pip3.7 install allennlp 'spacy>=2.2.2'
+rm -fr $D
 exit 0
