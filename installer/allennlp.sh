@@ -1,7 +1,7 @@
 #! /bin/sh
 # Allennlp installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-numpy python37-cffi
-#   gcc-g++ gcc-fortran git wget make cmake
+#   gcc-g++ gcc-fortran git curl make cmake
 #   libopenblas liblapack-devel libhdf5-devel libfreetype-devel
 case "`uname -a`" in
 *'x86_64 Cygwin') : ;;
@@ -15,15 +15,13 @@ pip3.7 install scipy@git+https://github.com/scipy/scipy
 pip3.7 list |
 ( if egrep '^sentencepiece '
   then :
-  else wget https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/sentencepiece.sh
-       sh -x sentencepiece.sh
+  else curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/sentencepiece.sh | sh -x
   fi
 )
 pip3.7 list |
 ( if egrep '^h5py '
   then :
-  else wget https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/h5py.sh
-       sh -x h5py.sh
+  else curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/h5py.sh | sh -x
   fi
 )
 pip3.7 install allennlp 'spacy>=2.2.2'
