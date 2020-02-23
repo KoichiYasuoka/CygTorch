@@ -9,7 +9,8 @@ case "`uname -a`" in
 esac
 git clone --depth=1 https://github.com/h5py/h5py
 cd h5py
-python3.7 setup.py configure --hdf5-version=1.10.6
+set `sed -n 's/^#define *H5_VERSION *//p' /usr/include/H5pubconf.h | tr -d '"'` 1.10.6
+python3.7 setup.py configure --hdf5-version=$1
 python3.7 setup.py configure --hdf5=/usr/lib/libhd5.dll.a
 python3.7 setup.py bdist_wheel
 cd dist
