@@ -10,7 +10,7 @@ case "`uname -a`" in
 esac
 pip3.7 install -U cython wheel pybind11 mecab-cygwin
 pip3.7 install 'spacy>=2.2.2' --no-build-isolation
-pip3.7 install cygtorch -f https://github.com/KoichiYasuoka/CygTorch
+pip3.7 install torch -f https://github.com/KoichiYasuoka/CygTorch
 pip3.7 install git+https://github.com/scipy/scipy
 wget https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/sentencepiece.sh
 sh -x sentencepiece.sh
