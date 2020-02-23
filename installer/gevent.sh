@@ -1,7 +1,7 @@
 #! /bin/sh
 # h5py installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-cffi
-#   gcc-g++ git
+#   gcc-g++ git libuv-devel
 case "`uname -a`" in
 *'x86_64 Cygwin') : ;;
 *) echo Only for Cygwin64 >&2

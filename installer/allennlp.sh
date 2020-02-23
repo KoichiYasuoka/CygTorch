@@ -2,7 +2,7 @@
 # Allennlp installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-numpy python37-cffi
 #   gcc-g++ gcc-fortran git curl make cmake
-#   libopenblas liblapack-devel libhdf5-devel libfreetype-devel
+#   libopenblas liblapack-devel libhdf5-devel libfreetype-devel libuv-devel
 case "`uname -a`" in
 *'x86_64 Cygwin') : ;;
 *) echo Only for Cygwin64 >&2
