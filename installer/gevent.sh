@@ -7,7 +7,7 @@ case "`uname -a`" in
 *) echo Only for Cygwin64 >&2
    exit 2 ;;
 esac
-D=/tmp/gevent$
+D=/tmp/gevent$$
 mkdir $D
 cd $D
 pip3.7 install greenlet
