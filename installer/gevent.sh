@@ -13,13 +13,7 @@ cd $D
 pip3.7 install greenlet
 git clone --depth=1 https://github.com/gevent/gevent
 cd gevent
-ex -s src/gevent/libuv/_corecffi_build.py << 'EOF'
-/^LIBUV_EMBED *=/a
-LIBUV_EMBED=False
-.
-wq
-EOF
-python3.7 setup.py bdist_wheel
+env GEVENTSETUP_EMBED_LIBUV=False python3.7 setup.py bdist_wheel
 cd dist
 pip3.7 install gevent*.whl
 rm -fr $D
