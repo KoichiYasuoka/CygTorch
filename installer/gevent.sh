@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/sh -x
 # gevent installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-cffi
 #   gcc-g++ git libuv-devel

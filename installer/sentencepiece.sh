@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/sh -x
 # SentencePiece installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-numpy python37-wheel
 #   gcc-g++ git make cmake

@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/sh -x
 # h5py installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-numpy python37-wheel
 #   gcc-g++ git libhdf5-devel
