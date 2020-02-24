@@ -7,6 +7,9 @@ case "`uname -a`" in
 *) echo Only for Cygwin64 >&2
    exit 2 ;;
 esac
+D=/tmp/h5py$$
+mkdir $D
+cd $D
 git clone --depth=1 https://github.com/h5py/h5py
 cd h5py
 set `sed -n 's/^#define *H5_VERSION *//p' /usr/include/H5pubconf.h | tr -d '"'` 1.10.6
@@ -15,4 +18,5 @@ python3.7 setup.py configure --hdf5=/usr/lib/libhd5.dll.a
 python3.7 setup.py bdist_wheel
 cd dist
 pip3.7 install h5py*.whl
+rm -fr $D
 exit 0

@@ -1,5 +1,5 @@
 #! /bin/sh
-# h5py installer for Cygwin64, which requires:
+# gevent installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-cffi
 #   gcc-g++ git libuv-devel
 case "`uname -a`" in
@@ -7,6 +7,9 @@ case "`uname -a`" in
 *) echo Only for Cygwin64 >&2
    exit 2 ;;
 esac
+D=/tmp/gevent$
+mkdir $D
+cd $D
 pip3.7 install greenlet
 git clone --depth=1 https://github.com/gevent/gevent
 cd gevent
@@ -19,4 +22,5 @@ EOF
 python3.7 setup.py bdist_wheel
 cd dist
 pip3.7 install gevent*.whl
+rm -fr $D
 exit 0

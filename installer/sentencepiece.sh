@@ -7,6 +7,9 @@ case "`uname -a`" in
 *) echo Only for Cygwin64 >&2
    exit 2 ;;
 esac
+D=/tmp/sentencepiece$$
+mkdir $D
+cd $D
 git clone --depth=1 https://github.com/google/sentencepiece
 cd sentencepiece
 cmake . && make
@@ -19,4 +22,5 @@ cd python
 env PKG_CONFIG_PATH=.. CPATH=../src LIBRARY_PATH=../src python3.7 setup.py bdist_wheel
 cd dist
 pip3.7 install sentencepiece*.whl
+rm -fr $D
 exit 0
