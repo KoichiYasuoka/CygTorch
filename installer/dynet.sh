@@ -1,10 +1,10 @@
 #! /bin/sh -x
-# DyNet installer for Cygwin64, which requires:
+# DyNet installer for Cygwin, which requires:
 #   python37-devel python37-pip python37-cython python37-numpy python37-wheel
 #   gcc-g++ git make cmake
 case "`uname -a`" in
-*'x86_64 Cygwin') : ;;
-*) echo Only for Cygwin64 >&2
+*' Cygwin') : ;;
+*) echo Only for Cygwin >&2
    exit 2 ;;
 esac
 D=/tmp/dynet$$
@@ -36,7 +36,7 @@ EOF
      ) | ex -s setup.py
 fi
 python3.7 setup.py bdist_wheel
-cd build/py3.7-64bit/python/dist
+cd build/py3.7-??bit/python/dist
 pip3.7 install dyNET*.whl
 rm -fr $D
 exit 0
