@@ -1,10 +1,10 @@
 #! /bin/sh -x
-# gevent installer for Cygwin64, which requires:
+# gevent installer for Cygwin, which requires:
 #   python37-devel python37-pip python37-cython python37-cffi
 #   gcc-g++ git libuv-devel
 case "`uname -a`" in
-*'x86_64 Cygwin') : ;;
-*) echo Only for Cygwin64 >&2
+*' Cygwin') : ;;
+*) echo Only for Cygwin >&2
    exit 2 ;;
 esac
 D=/tmp/gevent$$

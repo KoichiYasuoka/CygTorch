@@ -1,10 +1,10 @@
 #! /bin/sh -x
-# SentencePiece installer for Cygwin64, which requires:
+# SentencePiece installer for Cygwin, which requires:
 #   python37-devel python37-pip python37-cython python37-numpy python37-wheel
 #   gcc-g++ git make cmake
 case "`uname -a`" in
-*'x86_64 Cygwin') : ;;
-*) echo Only for Cygwin64 >&2
+*' Cygwin') : ;;
+*) echo Only for Cygwin >&2
    exit 2 ;;
 esac
 D=/tmp/sentencepiece$$
