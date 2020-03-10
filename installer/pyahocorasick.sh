@@ -1,5 +1,7 @@
 #! /bin/sh -x
-# pyhocorasick installer for Cygwin
+# Pyhocorasick installer for Cygwin, which requires:
+#   python37-devel python37-pip python37-wheel
+#   gcc-g++ git
 case "`uname -a`" in
 *' Cygwin') : ;;
 *) echo Only for Cygwin >&2
