@@ -3,7 +3,8 @@
 #   python37-devel python37-pip python37-cython python37-wheel
 #   gcc-g++ git wget
 case "`uname -a`" in
-*' Cygwin') : ;;
+*'x86_64 Cygwin') C=x86_64 ;;
+*'i686 Cygwin') C=i686 ;;
 *) echo Only for Cygwin >&2
    exit 2 ;;
 esac
@@ -13,18 +14,17 @@ cd $D
 PATH="$D/.cargo/bin:$PATH"
 USERPROFILE="`cygpath -ad $D`"
 export PATH USERPROFILE
-wget https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-gnu/rustup-init.exe
+wget https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
-./rustup-init.exe << 'EOF'
-y
-2
-x86_64-pc-windows-gnu
-nightly
-minimal
-n
-1
-
-EOF
+( echo y
+  echo 2
+  echo "$C"-pc-windows-gnu
+  echo nightly
+  echo minimal
+  echo n
+  echo 1
+  echo ''
+) | ./rustup-init.exe
 git clone --depth=1 https://github.com/huggingface/tokenizers
 cd tokenizers/bindings/python
 cargo build --release
