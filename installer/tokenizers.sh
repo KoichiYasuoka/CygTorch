@@ -20,7 +20,7 @@ y
 2
 x86_64-pc-windows-gnu
 nightly
-default
+minimal
 n
 1
 
