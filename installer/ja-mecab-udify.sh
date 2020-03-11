@@ -31,4 +31,9 @@ pip3.7 list |
        pip3.7 install tokenizers==$V https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.5/ja_mecab_udify-0.5.tar.gz
   fi
 )
+python3.7 -c '
+import spacy
+ja=spacy.load("ja_mecab_udify")
+quit()
+'
 exit 0
