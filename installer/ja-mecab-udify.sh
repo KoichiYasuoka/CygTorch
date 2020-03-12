@@ -31,7 +31,7 @@ pip3.7 list |
 )
 python3.7 -c '
 import spacy
-ja=spacy.load("ja_mecab_udify")
+ud=spacy.load("ja_mecab_udify")
 quit()
 '
 exit 0
