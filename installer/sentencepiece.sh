@@ -16,9 +16,11 @@ cmake . && make
 cd python
 ( echo /version=version,/a
   echo '    data_files=[("local/bin",['
-  ls ../src/*.dll | sed 's/^.*$/"&",/' ; echo '])],'
+  ls ../src/*.dll | sed 's/^.*$/"&",/'
+  echo '])],'
   echo .
-  echo wq ) | ex -s setup.py
+  echo wq
+) | ex -s setup.py
 env PKG_CONFIG_PATH=.. CPATH=../src LIBRARY_PATH=../src python3.7 setup.py bdist_wheel
 cd dist
 pip3.7 install sentencepiece*.whl
