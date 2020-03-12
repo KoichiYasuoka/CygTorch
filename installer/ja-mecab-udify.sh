@@ -14,12 +14,12 @@ pip3.7 list |
 )
 pip3.7 install pyahocorasick@git+https://github.com/KoichiYasuoka/pyahocorasick
 pip3.7 list |
-( egrep '^pytokenizations ' ||
-  curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pytokenizations.sh | sh -x
-)
-pip3.7 list |
 ( egrep '^tokenizers ' ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/tokenizers.sh | sh -x
+)
+pip3.7 list |
+( egrep '^pytokenizations ' ||
+  curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pytokenizations.sh | sh -x
 )
 pip3.7 list |
 ( if egrep '^ja-mecab-udify '
