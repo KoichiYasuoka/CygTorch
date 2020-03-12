@@ -12,10 +12,7 @@ pip3.7 list |
 ( egrep '^allennlp ' ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/allennlp.sh | sh -x
 )
-pip3.7 list |
-( egrep '^pyahocorasick ' ||
-  curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pyahocorasick.sh | sh -x
-)
+pip3.7 install pyahocorasick@git+https://github.com/KoichiYasuoka/pyahocorasick
 pip3.7 list |
 ( egrep '^pytokenizations ' ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pytokenizations.sh | sh -x
