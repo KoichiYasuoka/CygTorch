@@ -17,10 +17,11 @@ pip3.7 list |
 ( egrep '^tokenizers ' ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/tokenizers.sh | sh -x
 )
-pip3.7 list |
-( egrep '^pytokenizations ' ||
-  curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pytokenizations.sh | sh -x
-)
+if [ -x /usr/lib/python3.7/site-packages/tokenizations/tokenizations.dll ]
+then :
+else pip3.7 uninstall pytokenizations
+     curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pytokenizations.sh | sh -x
+fi
 pip3.7 list |
 ( if egrep '^ja-mecab-udify '
   then :
