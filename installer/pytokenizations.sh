@@ -43,7 +43,7 @@ EOF
        echo wq
      ) | ex -s build.rs
      ex -s src/exceptions.rs << 'EOF'
-%s/"windows"/"cygwin"/
+%s/"windows"/"dummy"/
 wq
 EOF
   done
