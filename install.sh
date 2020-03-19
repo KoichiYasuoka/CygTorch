@@ -15,6 +15,19 @@ case "$1" in
 --no-compile) cd dist
               exec pip3.7 install torch-1.4.0+cpu-py37-none-any.whl ;;
 esac
+cd /etc/setup
+F=true
+for P in python37-devel python37-pip python37-cython python37-numpy python37-wheel gcc-g++ git make cmake
+do if [ ! -s $P.lst.gz ]
+   then echo $P not found >&2
+        F=false
+   fi
+done
+if $F
+then :
+else exit 2
+fi
+cd /tmp
 PY_MAJOR_VERSION=3
 PYTORCH_BUILD_VERSION=1.4.0+cpu
 PYTORCH_BUILD_NUMBER=0
