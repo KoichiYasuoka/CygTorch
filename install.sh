@@ -143,5 +143,5 @@ EOF
 fi
 python3.7 setup.py bdist_wheel
 cd dist
-pip3.7 install --no-deps torch-1.4.0*.whl
+pip3.7 install -U --no-deps torch-1.4.0*.whl
 exit 0
