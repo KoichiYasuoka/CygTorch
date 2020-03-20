@@ -48,6 +48,19 @@ then pip3.7 install -r requirements.txt
 wq
 EOF
      fi
+     fgrep -l Windows third_party/cpuinfo/CMakeLists.txt third_party/*/third_party/cpuinfo/CMakeLists.txt |
+     ( while read F
+       do ex -s $F << 'EOF'
+%s/Windows/CYGWIN/
+1a
+if(POLICY CMP0054)
+  cmake_policy(SET CMP0054 NEW)
+endif()
+.
+wq
+EOF
+       done
+     )
      mkdir build
      cd build 
      cmake .. `python3.7 ../scripts/get_python_cmake_flags.py` -DCYGWIN=ON -DBUILD_CAFFE2_OPS=OFF -DBUILD_PYTHON=ON -DBUILD_SHARED_LIBS=OFF -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DINTERN_BUILD_MOBILE=OFF -DCMAKE_INSTALL_PREFIX=$P/torch -DCMAKE_PREFIX_PATH=/usr/lib/python3.7/site-packages -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-lpython3.7 -DNUMPY_INCLUDE_DIR=/usr/lib/python3.7/site-packages/numpy/core/include -DPYTHON_LIBRARY=/usr/lib/libpython3.7m.dll.a -DTORCH_BUILD_VERSION=1.4.0+cpu -DUSE_CUDA=OFF -DUSE_FBGEMM=OFF -DUSE_NUMPY=ON -DNDEBUG=ON
@@ -87,17 +100,18 @@ wq
 EOF
   done
 )
-F=aten/src/ATen/native/DispatchStub.cpp
-if fgrep -l '__x86_64' $F
-then :
-else ex -s $F << 'EOF'
-/<cpuinfo\.h>/i
-#undef __x86_64__
-#undef __x86_64
+egrep -l '_WIN32( *$|[^_])' third_party/cpuinfo/include/*.h third_party/cpuinfo/src/cpuinfo/*.h third_party/cpuinfo/src/*.c |
+( while read F
+  do ex -s $F << 'EOF'
+%s/_WIN32/__CYGWIN__/
+/<windows.h>/i
+	#define _WIN32_WINNT 0x0603
+	#include <intrin.h>
 .
 wq
 EOF
-fi
+  done
+)
 F=torch/csrc/jit/script/python_tree_views.cpp
 if egrep -l '^#undef _C' $F
 then :
