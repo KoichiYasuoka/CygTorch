@@ -28,7 +28,7 @@ then :
 else exit 2
 fi
 cd /tmp
-CPUINFO=false
+CPUINFO=true
 PY_MAJOR_VERSION=3
 PYTORCH_BUILD_VERSION=1.4.0+cpu
 PYTORCH_BUILD_NUMBER=0
@@ -148,6 +148,8 @@ else F=aten/src/ATen/native/DispatchStub.cpp
 /<cpuinfo\.h>/i
 #undef __x86_64__
 #undef __x86_64
+.
+wq
 EOF
      fi
 fi
