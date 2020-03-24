@@ -37,6 +37,6 @@ EOF
 fi
 python3.7 setup.py bdist_wheel
 cd build/py3.7-??bit/python/dist
-pip3.7 install dyNET*.whl
+pip3.7 install -U dyNET*.whl
 rm -fr $D
 exit 0
