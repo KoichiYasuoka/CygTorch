@@ -25,11 +25,12 @@ chmod u+x rustup-init.exe
   echo 1
   echo ''
 ) | ./rustup-init.exe
-git clone --depth=1 https://github.com/huggingface/tokenizers
-cd tokenizers/bindings/python
+wget https://github.com/huggingface/tokenizers/archive/python-v0.6.0.tar.gz
+tar xzf python-v0.6.0.tar.gz
+cd tokenizers-python-v0.6.0/bindings/python
 cargo build --release
 ( B=`cygpath -ad /usr/bin | sed 's/\\\\/\\\\\\\\\\\\\\\\/g'`
-  for PYO in $D/.cargo/registry/src/*/pyo3-0.8.*
+  for PYO in $D/.cargo/registry/src/*/pyo3-0*
   do cd $PYO
      ( echo '/const *PYTHON_INTERPRETER/'
        echo 's/"python3"/"'$B'\\\\python3.7m.exe"/'
@@ -48,7 +49,7 @@ wq
 EOF
   done
 )
-rm -fr target/release/build/pyo3-*
+rm -fr target/release/build/pyo3-0*
 cargo build --release
 pip3.7 install git+https://github.com/PyO3/setuptools-rust
 python3.7 setup.py bdist_wheel

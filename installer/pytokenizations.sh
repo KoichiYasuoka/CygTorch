@@ -29,7 +29,7 @@ git clone --depth=1 https://github.com/tamuhey/tokenizations
 cd tokenizations/python
 cargo build --release
 ( B=`cygpath -ad /usr/bin | sed 's/\\\\/\\\\\\\\\\\\\\\\/g'`
-  for PYO in $D/.cargo/registry/src/*/pyo3-0.8.*
+  for PYO in $D/.cargo/registry/src/*/pyo3-0*
   do cd $PYO
      ( echo '/const *PYTHON_INTERPRETER/'
        echo 's/"python3"/"'$B'\\\\python3.7m.exe"/'
@@ -48,7 +48,7 @@ wq
 EOF
   done
 )
-rm -fr target/release/build/pyo3-*
+rm -fr target/release/build/pyo3-0*
 cargo build --release
 cp target/release/tokenizations.dll tokenizations/tokenizations.dll
 chmod 755 tokenizations/tokenizations.dll
