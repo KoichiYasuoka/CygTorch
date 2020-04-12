@@ -49,7 +49,7 @@ wq
 EOF
   done
 )
-rm -fr target/release/build/pyo3-0*
+rm -fr target/release/build/pyo3-*
 cargo build --release
 pip3.7 install git+https://github.com/PyO3/setuptools-rust
 python3.7 setup.py bdist_wheel

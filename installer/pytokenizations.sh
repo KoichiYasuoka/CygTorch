@@ -48,7 +48,7 @@ wq
 EOF
   done
 )
-rm -fr target/release/build/pyo3-0*
+rm -fr target/release/build/pyo3-*
 cargo build --release
 cp target/release/tokenizations.dll tokenizations/tokenizations.dll
 chmod 755 tokenizations/tokenizations.dll
