@@ -1,6 +1,6 @@
 #! /bin/sh -x
 # Juman and KNP installer for Cygwin, which requires:
-#   python37-devel python37-pip gcc-g++ wget make
+#   gcc-g++ wget make
 case "`uname -a`" in
 *'x86_64 Cygwin') : ;;
 *) echo Only for Cygwin64 >&2
