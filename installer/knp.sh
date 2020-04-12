@@ -14,13 +14,15 @@ then cd $D
      tar jxf juman.tar.gz
      cd juman-7.01
      ./configure
-     make && make install
+     make install
 fi
 if [ ! -x /usr/local/bin/knp ]
 then if [ ! -x /cygdrive/?/Program?Files/knp/knp.exe ]
      then cd $D
+	  wget 'http://nlp.ist.i.kyoto-u.ac.jp/DLcounter/lime.cgi?down=http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/juman/juman-7.0-x64-installer.exe' -O juman-installer.exe
 	  wget 'http://nlp.ist.i.kyoto-u.ac.jp/DLcounter/lime.cgi?down=http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/knp-4.11-x64-installer.exe' -O knp-installer.exe
-	  chmod u+x knp-installer.exe
+	  chmod u+x juman-installer.exe knp-installer.exe
+	  ./juman-installer.exe
 	  ./knp-installer.exe
      fi
      cat > /usr/local/bin/knp << 'EOF'
