@@ -10,7 +10,7 @@ D=/tmp/knp$$
 mkdir $D
 if [ ! -x /usr/local/bin/juman.exe ]
 then cd $D
-     wget 'http://nlp.ist.i.kyoto-u.ac.jp/DLcounter/lime.cgi?down=http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/juman/juman-7.01.tar.bz2&name=juman-7.01.tar.bz2' -O juman.tar.gz
+     wget 'http://nlp.ist.i.kyoto-u.ac.jp/DLcounter/lime.cgi?down=http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/juman/juman-7.01.tar.bz2' -O juman.tar.gz
      tar jxf juman.tar.gz
      cd juman-7.01
      ./configure
@@ -19,7 +19,7 @@ fi
 if [ ! -x /usr/local/bin/knp ]
 then if [ ! -x /cygdrive/?/Program?Files/knp/knp.exe ]
      then cd $D
-	  wget 'http://nlp.ist.i.kyoto-u.ac.jp/DLcounter/lime.cgi?down=http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/knp-4.11-x64-installer.exe&name=knp-4.11-x64-installer.exe' -O knp-installer.exe
+	  wget 'http://nlp.ist.i.kyoto-u.ac.jp/DLcounter/lime.cgi?down=http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/knp-4.11-x64-installer.exe' -O knp-installer.exe
 	  chmod u+x knp-installer.exe
 	  ./knp-installer.exe
      fi
