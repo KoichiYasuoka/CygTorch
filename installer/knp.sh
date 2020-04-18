@@ -1,6 +1,6 @@
 #! /bin/sh -x
 # Juman and KNP installer for Cygwin, which requires:
-#   gcc-g++ wget make
+#   gcc-g++ wget make zlib-devel
 D=/tmp/knp$$
 mkdir $D
 if [ ! -x /usr/local/bin/juman ]
