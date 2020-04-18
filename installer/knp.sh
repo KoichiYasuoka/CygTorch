@@ -23,7 +23,7 @@ then cd $D
 /#define  *main/i
 #ifndef __CYGWIN__
 .
-$a
+/#endif/i
 #endif
 .
 wq
