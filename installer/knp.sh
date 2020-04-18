@@ -30,21 +30,21 @@ wq
 EOF
      fi
      cd ../dict/ebcf
-     if [ ! -s cf.idx ]
-     then for F in cf.idx.xz cf.dat.xz.1 cf.dat.xz.2
-          do wget https://github.com/KoichiYasuoka/knp-cygwin64/raw/master/share/knp/dict/ebcf/$F
-          done
-          cat cf.dat.xz.1 cf.dat.xz.2 > cf.dat.xz
-          touch cf.idx.xz
-          unxz cf.idx.xz cf.dat.xz
-     fi
      if [ ! -s noun.idx ]
      then for F in noun.idx.xz noun.dat.xz.1 noun.dat.xz.2
           do wget https://github.com/KoichiYasuoka/knp-cygwin64/raw/master/share/knp/dict/ebcf/$F
           done
-          cat noun.dat.xz.1 noun.dat.xz.2 > noun.dat.xz
+          cat noun.dat.xz.[12] > noun.dat.xz
           touch noun.idx.xz
           unxz noun.idx.xz noun.dat.xz
+     fi
+     if [ ! -s cf.idx ]
+     then for F in cf.idx.xz cf.dat.xz.1 cf.dat.xz.2
+          do wget https://github.com/KoichiYasuoka/knp-cygwin64/raw/master/share/knp/dict/ebcf/$F
+          done
+          cat cf.dat.xz.[12] > cf.dat.xz
+          touch cf.idx.xz
+          unxz cf.idx.xz cf.dat.xz
      fi
      cd ../..
      ./configure
