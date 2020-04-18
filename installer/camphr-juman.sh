@@ -9,7 +9,7 @@ case "`uname -a`" in
    exit 2 ;;
 esac
 if [ ! -x /usr/local/bin/knp ]
-then curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/knp.sh | sh -x
+then pip3.7 install knp-cygwin64@git+https://github.com/KoichiYasuoka/knp-cygwin64
 fi
 pip3.7 list |
 ( egrep '^allennlp ' ||
