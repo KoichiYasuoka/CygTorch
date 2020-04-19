@@ -1,5 +1,5 @@
 #! /bin/sh -x
-# Juman and KNP installer for Cygwin, which requires:
+# JUMAN and KNP installer for Cygwin, which requires:
 #   gcc-g++ wget make zlib-devel
 case "`uname`" in
 CYGWIN*) CYGWIN=true ;;
@@ -12,15 +12,25 @@ fi
 D=/tmp/knp$$
 mkdir $D
 if [ ! -x /usr/local/bin/juman ]
-then cd $D
-     wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/juman/juman-7.01.tar.bz2
-     tar xjf juman-7.01.tar.bz2
-     cd juman-7.01
-     ./configure
-     make || exit 1
-     if $CYGWIN
-     then make install
-     else sudo make install
+then if [ -x /usr/bin/juman -a -d /usr/lib/juman -a -s /usr/include/juman.h ]
+     then if [ ! -d /usr/local/share/juman ]
+          then if $CYGWIN
+	       then mkdir -p /usr/local/share
+		    ln -s /usr/lib/juman /usr/local/share
+	       else sudo mkdir -p /usr/local/share
+		    sudo ln -s /usr/lib/juman /usr/local/share
+               fi
+          fi
+     else cd $D
+	  wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/juman/juman-7.01.tar.bz2
+	  tar xjf juman-7.01.tar.bz2
+	  cd juman-7.01
+	  ./configure
+	  make || exit 1
+	  if $CYGWIN
+	  then make install
+	  else sudo make install
+	  fi
      fi
 fi
 if [ ! -x /usr/local/bin/knp ]
