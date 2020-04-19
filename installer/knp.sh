@@ -1,6 +1,14 @@
 #! /bin/sh -x
 # Juman and KNP installer for Cygwin, which requires:
 #   gcc-g++ wget make zlib-devel
+case "`uname`" in
+CYGWIN*) CYGWIN=true ;;
+*) CYGWIN=false ;;
+esac
+if [ ! -s /usr/include/zlib.h ]
+then echo zlib.h not found. Please install zlib-devel or zlib1g-dev >&2
+     exit 2
+fi
 D=/tmp/knp$$
 mkdir $D
 if [ ! -x /usr/local/bin/juman ]
@@ -10,7 +18,10 @@ then cd $D
      cd juman-7.01
      ./configure
      make || exit 1
-     make install
+     if $CYGWIN
+     then make install
+     else sudo make install
+     fi
 fi
 if [ ! -x /usr/local/bin/knp ]
 then cd $D
@@ -49,7 +60,10 @@ EOF
      cd ../..
      ./configure
      make || exit 1
-     make install
+     if $CYGWIN
+     then make install
+     else sudo make install
+     fi
 fi
 rm -fr $D
 exit 0
