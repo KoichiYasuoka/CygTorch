@@ -16,8 +16,7 @@ USERPROFILE="`cygpath -ad $D`"
 export PATH USERPROFILE
 wget https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
-( echo y
-  echo 2
+( echo 2
   echo "$C"-pc-windows-gnu
   echo nightly
   echo minimal
