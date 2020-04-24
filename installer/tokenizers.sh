@@ -17,14 +17,7 @@ PYTHONIOENCODING=utf-8
 export PATH USERPROFILE PYTHONIOENCODING
 wget https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
-( echo 2
-  echo "$C"-pc-windows-gnu
-  echo nightly
-  echo minimal
-  echo n
-  echo 1
-  echo ''
-) | ./rustup-init.exe
+./rustup-init.exe -y --no-modify-path --default-host "$C"-pc-windows-gnu --default-tool-chain nightly --profile minimal
 wget https://github.com/huggingface/tokenizers/archive/python-v0.7.0.tar.gz
 tar xzf python-v0.7.0.tar.gz
 cd tokenizers-python-v0.7.0/bindings/python
