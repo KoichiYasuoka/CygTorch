@@ -13,7 +13,8 @@ mkdir $D
 cd $D
 PATH="$D/.cargo/bin:$PATH"
 USERPROFILE="`cygpath -ad $D`"
-export PATH USERPROFILE
+PYTHONIOENCODING=utf-8
+export PATH USERPROFILE PYTHONIOENCODING
 wget https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
 ( echo 2
@@ -24,9 +25,9 @@ chmod u+x rustup-init.exe
   echo 1
   echo ''
 ) | ./rustup-init.exe
-wget https://github.com/huggingface/tokenizers/archive/python-v0.6.0.tar.gz
-tar xzf python-v0.6.0.tar.gz
-cd tokenizers-python-v0.6.0/bindings/python
+wget https://github.com/huggingface/tokenizers/archive/python-v0.7.0.tar.gz
+tar xzf python-v0.7.0.tar.gz
+cd tokenizers-python-v0.7.0/bindings/python
 cargo build --release
 ( B=`cygpath -ad /usr/bin | sed 's/\\\\/\\\\\\\\\\\\\\\\/g'`
   for PYO in $D/.cargo/registry/src/*/pyo3-0*
@@ -38,6 +39,8 @@ s?^/*??
 .+1,/^}/s?^?//?
 /pythonXY/s/pythonXY:.*/pythonXY:python3.7m"/
 .+1s?^?//?
+/=native={}\\\\libs"/s/=native={}.*$/=native={}"/
+.+1,/);/s?^?//?
 EOF
        echo '%s/=native={}".*$/=native='$B'");/'
        echo wq
