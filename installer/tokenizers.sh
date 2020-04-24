@@ -14,7 +14,8 @@ cd $D
 PATH="$D/.cargo/bin:$PATH"
 USERPROFILE="`cygpath -ad $D`"
 PYTHONIOENCODING=utf-8
-export PATH USERPROFILE PYTHONIOENCODING
+PYTHON_SYS_EXECUTABLE="`cygpath -ad /usr/bin/python3.7`"
+export PATH USERPROFILE PYTHONIOENCODING PYTHON_SYS_EXECUTABLE
 wget https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
 ./rustup-init.exe -y --no-modify-path --default-host "$C"-pc-windows-gnu --default-toolchain nightly --profile minimal
@@ -25,9 +26,7 @@ cargo build --release
 ( B=`cygpath -ad /usr/bin | sed 's/\\\\/\\\\\\\\\\\\\\\\/g'`
   for PYO in $D/.cargo/registry/src/*/pyo3-0*
   do cd $PYO
-     ( echo '/const *PYTHON_INTERPRETER/'
-       echo 's/"python3"/"'$B'\\\\python3.7m.exe"/'
-       cat << 'EOF'
+     ( cat << 'EOF'
 s?^/*??
 .+1,/^}/s?^?//?
 /pythonXY/s/pythonXY:.*/pythonXY:python3.7m"/
