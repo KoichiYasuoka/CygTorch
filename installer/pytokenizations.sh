@@ -16,14 +16,7 @@ USERPROFILE="`cygpath -ad $D`"
 export PATH USERPROFILE
 wget https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
-( echo 2
-  echo "$C"-pc-windows-gnu
-  echo nightly
-  echo minimal
-  echo n
-  echo 1
-  echo ''
-) | ./rustup-init.exe
+./rustup-init.exe -y --no-modify-path --default-host "$C"-pc-windows-gnu --default-toolchain nightly --profile minimal
 git clone --depth=1 https://github.com/tamuhey/tokenizations
 cd tokenizations/python
 cargo build --release
