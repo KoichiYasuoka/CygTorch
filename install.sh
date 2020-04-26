@@ -119,6 +119,7 @@ then egrep -l '_WIN32( *$|[^_])' third_party/cpuinfo/include/*.h third_party/cpu
        do ex -s $F << 'EOF'
 %s/_WIN32/__CYGWIN__/
 /<windows.h>/i
+	#include <alloca.h>
 	#define _WIN32_WINNT 0x0603
 .
 wq
