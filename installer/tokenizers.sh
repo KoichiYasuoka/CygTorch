@@ -42,8 +42,17 @@ EOF
 wq
 EOF
   done
+  cd $D/.cargo/registry/src/*/parking_lot-*
+  ex -s src/lib.rs << 'EOF'
+%s/feature(asm)/feature(llvm_asm)/
+wq
+EOF
+  ex -s src/elision.rs << 'EOF'
+%s/ asm!/ llvm_asm!/
+wq
+EOF
 )
-rm -fr target/release/build/pyo3-*
+rm -fr target/release/build/pyo3-* target/release/build/parking_lot-*
 cargo build --release
 pip3.7 install git+https://github.com/PyO3/setuptools-rust
 python3.7 setup.py bdist_wheel
