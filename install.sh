@@ -1,5 +1,5 @@
 #! /bin/sh -x
-# PyTorch 1.4.0 installer for Cygwin64, which requires:
+# PyTorch 1.5.1 installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-numpy python37-wheel
 #   gcc-g++ git make cmake
 case "`uname -a`" in
@@ -13,7 +13,7 @@ then echo CygTorch: already installed >&2
 fi
 case "$1" in
 --no-compile) cd dist
-              exec pip3.7 install torch-1.4.0+cpu-py37-none-any.whl ;;
+              exec pip3.7 install torch-1.5.1+cpu-py37-none-any.whl ;;
 esac
 cd /etc/setup
 F=true
@@ -30,14 +30,14 @@ fi
 cd /tmp
 CPUINFO=true
 PY_MAJOR_VERSION=3
-PYTORCH_BUILD_VERSION=1.4.0+cpu
+PYTORCH_BUILD_VERSION=1.5.1+cpu
 PYTORCH_BUILD_NUMBER=0
 export PY_MAJOR_VERSION PYTORCH_BUILD_VERSION PYTORCH_BUILD_NUMBER
-if [ ! -d pytorch1.4.0 ]
-then git clone -b v1.4 --depth=1 https://github.com/pytorch/pytorch
-     mv pytorch pytorch1.4.0
+if [ ! -d pytorch1.5.1 ]
+then git clone -b v1.5.1 --depth=1 https://github.com/pytorch/pytorch
+     mv pytorch pytorch1.5.1
 fi
-cd pytorch1.4.0
+cd pytorch1.5.1
 P=`pwd`
 if [ ! -d build ]
 then pip3.7 install -r requirements.txt
@@ -49,6 +49,14 @@ then pip3.7 install -r requirements.txt
 wq
 EOF
      fi
+     fgrep -l 'if (NOT MSVC)' caffe2/CMakeLists.txt caffe2/utils/CMakeLists.txt |
+     ( while read F
+       do ex -s $F << 'EOF'
+%s/if (NOT MSVC)/if (NOT MSVC AND USE_XNNPACK)/
+wq
+EOF
+       done
+     )
      if $CPUINFO
      then fgrep -l Windows third_party/cpuinfo/CMakeLists.txt third_party/*/third_party/cpuinfo/CMakeLists.txt |
           ( while read F
@@ -66,7 +74,7 @@ EOF
      fi
      mkdir build
      cd build 
-     cmake .. `python3.7 ../scripts/get_python_cmake_flags.py` -DCYGWIN=ON -DBUILD_CAFFE2_OPS=OFF -DBUILD_PYTHON=ON -DBUILD_SHARED_LIBS=OFF -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DINTERN_BUILD_MOBILE=OFF -DCMAKE_INSTALL_PREFIX=$P/torch -DCMAKE_PREFIX_PATH=/usr/lib/python3.7/site-packages -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-lpython3.7 -DNUMPY_INCLUDE_DIR=/usr/lib/python3.7/site-packages/numpy/core/include -DPYTHON_LIBRARY=/usr/lib/libpython3.7m.dll.a -DTORCH_BUILD_VERSION=1.4.0+cpu -DUSE_CUDA=OFF -DUSE_FBGEMM=OFF -DUSE_NUMPY=ON -DNDEBUG=ON
+     cmake .. `python3.7 ../scripts/get_python_cmake_flags.py` -DCYGWIN=ON -DBUILD_CAFFE2_OPS=OFF -DBUILD_PYTHON=ON -DBUILD_SHARED_LIBS=ON -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DINTERN_BUILD_MOBILE=OFF -DCMAKE_INSTALL_PREFIX=$P/torch -DCMAKE_PREFIX_PATH=/usr/lib/python3.7/site-packages -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-lpython3.7 -DNUMPY_INCLUDE_DIR=/usr/lib/python3.7/site-packages/numpy/core/include -DPYTHON_LIBRARY=/usr/lib/libpython3.7m.dll.a -DTORCH_BUILD_VERSION=1.5.1+cpu -DUSE_CUDA=OFF -DUSE_FBGEMM=OFF -DUSE_NUMPY=ON -DNDEBUG=ON
      cd ..
 fi
 awk '
@@ -87,7 +95,7 @@ wq
 EOF
   done
 )
-fgrep -l __ANDROID__ torch/csrc/jit/script/*.cpp |
+fgrep -l __ANDROID__ torch/csrc/jit/*/*.cpp |
 ( while read F
   do ex -s $F << 'EOF'
 %s/__ANDROID__/__CYGWIN__/
@@ -103,7 +111,7 @@ wq
 EOF
   done
 )
-F=torch/csrc/jit/script/python_tree_views.cpp
+F=torch/csrc/jit/python/python_tree_views.cpp
 if egrep -l '^#undef _C' $F
 then :
 else ex -s $F << 'EOF'
@@ -189,5 +197,5 @@ EOF
 fi
 python3.7 setup.py bdist_wheel
 cd dist
-pip3.7 install -U --no-deps torch-1.4.0*.whl
+pip3.7 install -U --no-deps torch-1.5.1*.whl
 exit 0
