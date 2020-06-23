@@ -8,7 +8,7 @@ case "`uname -a`" in
    exit 2 ;;
 esac
 pip3.7 install -U cython wheel pybind11
-pip3.7 install scipy@git+https://github.com/scipy/scipy
+pip3.7 install scipy --no-build-isolation
 pip3.7 list |
 ( egrep '^dyNET ' ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/dynet.sh | sh -x
