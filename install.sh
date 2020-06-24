@@ -1,7 +1,6 @@
 #! /bin/sh -x
 # PyTorch 1.5.1 installer for Cygwin64, which requires:
-#   python37-devel python37-pip python37-cython python37-numpy python37-wheel
-#   gcc-g++ git make cmake
+#   python37-devel python37-pip python37-wheel gcc-g++ git make cmake
 case "`uname -a`" in
 *'x86_64 Cygwin') : ;;
 *) echo CygTorch is only for Cygwin64 >&2
@@ -17,7 +16,7 @@ case "$1" in
 esac
 cd /etc/setup
 F=true
-for P in python37-devel python37-pip python37-cython python37-numpy python37-wheel gcc-g++ git make cmake
+for P in python37-devel python37-pip python37-wheel gcc-g++ git make cmake
 do if [ ! -s $P.lst.gz ]
    then echo $P not found >&2
         F=false
