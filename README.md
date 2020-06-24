@@ -20,6 +20,7 @@ sh -x ./install.sh --no-compile
 ## Wheels
 
 * [torch-1.5.1+cpu-py37-none-any.whl](https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/dist/torch-1.5.1+cpu-py37-none-any.whl)
+* [torch-1.5.1+cpu-py36-none-any.whl](https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/dist/torch-1.5.1+cpu-py36-none-any.whl)
 * [torch-1.4.0+cpu-py37-none-any.whl](https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/dist/torch-1.4.0+cpu-py37-none-any.whl)
 * [torch-1.4.0+cpu-py36-none-any.whl](https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/dist/torch-1.4.0+cpu-py36-none-any.whl)
 
