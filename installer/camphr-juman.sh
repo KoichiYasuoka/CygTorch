@@ -25,6 +25,6 @@ then :
 else pip3.7 uninstall pytokenizations
      curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pytokenizations.sh | sh -x
 fi
-V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\)  *$/\1/p'`
+V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
 pip3.7 install -U tokenizers==$V 'camphr[juman]'
 exit 0

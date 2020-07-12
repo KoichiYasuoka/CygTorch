@@ -25,7 +25,7 @@ fi
 pip3.7 list |
 ( if egrep '^ja-mecab-udify '
   then :
-  else V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\)  *$/\1/p'`
+  else V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
        pip3.7 install tokenizers==$V https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.5/ja_mecab_udify-0.5.tar.gz
   fi
 )

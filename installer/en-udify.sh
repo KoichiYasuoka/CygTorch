@@ -26,7 +26,7 @@ pip3.7 install 'fugashi[unidic-lite]'
 pip3.7 list |
 ( if egrep '^en-udify '
   then :
-  else V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\)  *$/\1/p'`
+  else V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
        pip3.7 install tokenizers==$V  https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.6.0/en_udify-0.6.0.tar.gz 'camphr[udify]>=0.6'
   fi
 )
