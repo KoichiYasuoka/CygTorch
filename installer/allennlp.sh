@@ -23,5 +23,10 @@ pip3.7 list |
 ( egrep '^gevent ' ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/gevent.sh | sh -x
 )
-pip3.7 install allennlp 'spacy>=2.2.2'
+pip3.7 list |
+( egrep '^tokenizers ' ||
+  curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/tokenizers.sh | sh -x
+)
+V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
+pip3.7 install tokenizers==$V allennlp 'spacy>=2.2.2'
 exit 0
