@@ -22,7 +22,7 @@ then :
 else pip3.7 uninstall pytokenizations
      curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pytokenizations.sh | sh -x
 fi
-pip3.7 install 'fugashi[unidic-lite]'
+pip3.7 install 'fugashi[unidic-lite]' sudachipy sudachidict-core
 pip3.7 list |
 ( if egrep '^en-udify '
   then :
