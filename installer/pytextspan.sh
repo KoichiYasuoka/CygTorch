@@ -18,8 +18,8 @@ export PATH USERPROFILE PYTHON_SYS_EXECUTABLE
 wget https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
 ./rustup-init.exe -y --no-modify-path --default-host "$C"-pc-windows-gnu --default-toolchain nightly --profile minimal
-wget https://github.com/tamuhey/textspan/archive/python/0.3.0.tar.gz
-tar xzf 0.3.0.tar.gz
+wget https://github.com/tamuhey/textspan/archive/python/0.3.1.tar.gz
+tar xzf 0.3.1.tar.gz
 cd textspan-python*/python
 cargo build --release
 ( B=`cygpath -ad /usr/bin | sed 's/\\\\/\\\\\\\\\\\\\\\\/g'`
@@ -39,17 +39,6 @@ rm -fr target/release/build/pyo3-*
 cargo build --release
 cp target/release/textspan.dll textspan/textspan.dll
 chmod 755 textspan/textspan.dll
-if fgrep '"pytextspan"' pyproject.toml
-then :
-else ex -s pyproject.toml << 'EOF'
-%s/"textspan"/"pytextspan"/
-/^$/i
-[[tool.poetry.packages]]
-include = "textspan"
-.
-wq
-EOF
-fi
 pip3.7 install poetry
 pip3.7 install . --no-build-isolation
 rm -fr $D
