@@ -13,25 +13,19 @@ mkdir $D
 cd $D
 PATH="$D/.cargo/bin:$PATH"
 USERPROFILE="`cygpath -ad $D`"
-export PATH USERPROFILE
+PYTHON_SYS_EXECUTABLE="`cygpath -ad /usr/bin/python3.7`"
+export PATH USERPROFILE PYTHON_SYS_EXECUTABLE
 wget https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
 ./rustup-init.exe -y --no-modify-path --default-host "$C"-pc-windows-gnu --default-toolchain nightly --profile minimal
-wget https://github.com/tamuhey/tokenizations/archive/python/0.4.10.tar.gz
-tar xzf 0.4.10.tar.gz
+wget https://github.com/tamuhey/tokenizations/archive/python/0.6.0.tar.gz
+tar xzf 0.6.0.tar.gz
 cd tokenizations-python*/python
 cargo build --release
 ( B=`cygpath -ad /usr/bin | sed 's/\\\\/\\\\\\\\\\\\\\\\/g'`
   for PYO in $D/.cargo/registry/src/*/pyo3-0*
   do cd $PYO
-     ( echo '/const *PYTHON_INTERPRETER/'
-       echo 's/"python3"/"'$B'\\\\python3.7m.exe"/'
-       cat << 'EOF'
-s?^/*??
-.+1,/^}/s?^?//?
-/pythonXY/s/pythonXY:.*/pythonXY:python3.7m"/
-.+1s?^?//?
-EOF
+     ( echo '%s/"python{}{}"/"python{}.{}m"/'
        echo '%s/=native={}".*$/=native='$B'");/'
        echo wq
      ) | ex -s build.rs
