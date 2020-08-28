@@ -30,7 +30,6 @@ then :
 else pip3.7 uninstall pytextspan
      curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pytextspan.sh | sh -x
 fi
-pip3.7 uninstall typing dataclasses
 V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
 pip3.7 install -U tokenizers==$V 'camphr[juman]>=0.7'
 exit 0
