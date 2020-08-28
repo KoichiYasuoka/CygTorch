@@ -22,12 +22,16 @@ then :
 else pip3.7 uninstall pytokenizations
      curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pytokenizations.sh | sh -x
 fi
-pip3.7 install 'fugashi[unidic-lite]' sudachipy sudachidict-core
+if [ -x /usr/lib/python3.7/site-packages/textspan/textspan*.dll ]
+then :
+else pip3.7 uninstall pytextspan
+     curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pytextspan.sh | sh -x
+fi
 pip3.7 list |
 ( if egrep '^en-udify '
   then :
   else V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
-       pip3.7 install tokenizers==$V  https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.6.0/en_udify-0.6.0.tar.gz 'camphr[udify]>=0.6'
+       pip3.7 install tokenizers==$V  https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.7.0/en_udify-0.7.tar.gz 'camphr>=0.7'
   fi
 )
 python3.7 -c '

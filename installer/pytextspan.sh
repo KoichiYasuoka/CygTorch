@@ -39,6 +39,17 @@ rm -fr target/release/build/pyo3-*
 cargo build --release
 cp target/release/textspan.dll textspan/textspan.dll
 chmod 755 textspan/textspan.dll
+if fgrep '"pytextspan"' pyproject.toml
+then :
+else ex -s pyproject.toml << 'EOF'
+%s/"textspan"/"pytextspan"/
+/^$/i
+[[tool.poetry.packages]]
+include = "textspan"
+.
+wq
+EOF
+fi
 pip3.7 install poetry
 pip3.7 install . --no-build-isolation
 rm -fr $D
