@@ -30,7 +30,8 @@ fi
 pip3.7 list |
 ( if egrep '^en-udify '
   then :
-  else V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
+  else pip3.7 uninstall typing dataclasses
+       V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
        pip3.7 install tokenizers==$V  https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.7.0/en_udify-0.7.tar.gz 'camphr>=0.7'
   fi
 )
