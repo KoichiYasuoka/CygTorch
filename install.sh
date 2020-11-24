@@ -1,5 +1,5 @@
 #! /bin/sh -x
-# PyTorch 1.5.1 installer for Cygwin64, which requires:
+# PyTorch 1.6.0 installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-numpy python37-wheel
 #   gcc-g++ git make cmake
 case "`uname -a`" in
@@ -13,7 +13,7 @@ then echo CygTorch: already installed >&2
 fi
 case "$1" in
 --no-compile) cd dist
-              exec pip3.7 install torch-1.5.1+cpu-py37-none-any.whl ;;
+              exec pip3.7 install torch-1.6.0+cpu-py37-none-any.whl ;;
 esac
 cd /etc/setup
 F=true
@@ -28,16 +28,15 @@ then :
 else exit 2
 fi
 cd /tmp
-CPUINFO=true
 PY_MAJOR_VERSION=3
-PYTORCH_BUILD_VERSION=1.5.1+cpu
+PYTORCH_BUILD_VERSION=1.6.0+cpu
 PYTORCH_BUILD_NUMBER=0
 export PY_MAJOR_VERSION PYTORCH_BUILD_VERSION PYTORCH_BUILD_NUMBER
-if [ ! -d pytorch1.5.1 ]
-then git clone -b v1.5.1 --depth=1 https://github.com/pytorch/pytorch
-     mv pytorch pytorch1.5.1
+if [ ! -d pytorch1.6.0 ]
+then git clone -b v1.6.0 --depth=1 https://github.com/pytorch/pytorch
+     mv pytorch pytorch1.6.0
 fi
-cd pytorch1.5.1
+cd pytorch1.6.0
 P=`pwd`
 if [ ! -d build ]
 then pip3.7 install -r requirements.txt
@@ -57,24 +56,9 @@ wq
 EOF
        done
      )
-     if $CPUINFO
-     then fgrep -l Windows third_party/cpuinfo/CMakeLists.txt third_party/*/third_party/cpuinfo/CMakeLists.txt |
-          ( while read F
-            do ex -s $F << 'EOF'
-%s/Windows/CYGWIN/
-1a
-if(POLICY CMP0054)
-  cmake_policy(SET CMP0054 NEW)
-endif()
-.
-wq
-EOF
-            done
-          )
-     fi
      mkdir build
      cd build 
-     cmake .. `python3.7 ../scripts/get_python_cmake_flags.py` -DCYGWIN=ON -DBUILD_CAFFE2_OPS=OFF -DBUILD_PYTHON=ON -DBUILD_SHARED_LIBS=ON -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DINTERN_BUILD_MOBILE=OFF -DCMAKE_INSTALL_PREFIX=$P/torch -DCMAKE_PREFIX_PATH=/usr/lib/python3.7/site-packages -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-lpython3.7 -DNUMPY_INCLUDE_DIR=/usr/lib/python3.7/site-packages/numpy/core/include -DPYTHON_LIBRARY=/usr/lib/libpython3.7m.dll.a -DTORCH_BUILD_VERSION=1.5.1+cpu -DUSE_CUDA=OFF -DUSE_FBGEMM=OFF -DUSE_NUMPY=ON -DNDEBUG=ON
+     cmake .. `python3.7 ../scripts/get_python_cmake_flags.py` -DCYGWIN=ON -DBUILD_CAFFE2_OPS=OFF -DBUILD_PYTHON=ON -DBUILD_SHARED_LIBS=ON -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DINTERN_BUILD_MOBILE=OFF -DCMAKE_INSTALL_PREFIX=$P/torch -DCMAKE_PREFIX_PATH=/usr/lib/python3.7/site-packages -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-lpython3.7 -DNUMPY_INCLUDE_DIR=/usr/lib/python3.7/site-packages/numpy/core/include -DPYTHON_LIBRARY=/usr/lib/libpython3.7m.dll.a -DTORCH_BUILD_VERSION=1.6.0+cpu -DUSE_CUDA=OFF -DUSE_FBGEMM=OFF -DUSE_MKLDNN=OFF -DUSE_NUMPY=ON -DNDEBUG=ON
      cd ..
 fi
 awk '
@@ -103,7 +87,7 @@ wq
 EOF
   done
 )
-fgrep -l '(_MSC_VER)' aten/src/ATen/cpu/vec256/vec256*.h |
+fgrep -l '(_MSC_VER)' aten/src/ATen/cpu/vec256/vec256*.h aten/src/ATen/native/quantized/cpu/kernels/*.cpp |
 ( while read F
   do ex -s $F << 'EOF'
 %s/(_MSC_VER)/(__CYGWIN__)/
@@ -120,47 +104,6 @@ else ex -s $F << 'EOF'
 .
 wq
 EOF
-fi
-if $CPUINFO
-then egrep -l '_WIN32( *$|[^_])' third_party/cpuinfo/include/*.h third_party/cpuinfo/src/cpuinfo/*.h third_party/cpuinfo/src/*.c |
-     ( while read F
-       do ex -s $F << 'EOF'
-%s/_WIN32/__CYGWIN__/
-/<windows.h>/i
-	#include <alloca.h>
-	#define _WIN32_WINNT 0x0603
-.
-wq
-EOF
-       done
-     )
-     for F in third_party/cpuinfo/src/x86/windows/*.[ch]
-     do if fgrep -l _WIN32_WINNT $F
-        then :
-        else ex -s $F << 'EOF'
-/<windows.h>/i
-#include <alloca.h>
-#define _WIN32_WINNT 0x0603
-.
-%s/_alloca/alloca/
-%s/unsigned __int64/DWORD64/
-%s/unsinged long/DWORD/
-%s/_BitScanForward/BitScanForward/
-wq
-EOF
-         fi
-     done
-else F=aten/src/ATen/native/DispatchStub.cpp
-     if fgrep -l '__x86_64' $F
-     then :
-     else ex -s $F << 'EOF'
-/<cpuinfo\.h>/i
-#undef __x86_64__
-#undef __x86_64
-.
-wq
-EOF
-     fi
 fi
 cd build
 set `sed -n 's/^cpu cores.*://p' /proc/cpuinfo` 1
@@ -197,5 +140,5 @@ EOF
 fi
 python3.7 setup.py bdist_wheel
 cd dist
-pip3.7 install -U --no-deps torch-1.5.1*.whl
+pip3.7 install -U --no-deps torch-1.6.0*.whl
 exit 0
