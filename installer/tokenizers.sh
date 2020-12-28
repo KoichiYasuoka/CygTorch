@@ -63,17 +63,7 @@ EOF
 )
 rm -fr target/release/build/pyo3-* target/release/build/parking_lot-* target/release/build/onig_sys-*
 cargo build --release
-curl -LO https://github.com/PyO3/setuptools-rust/archive/v0.11.1.tar.gz
-tar xzf v0.11.1.tar.gz
-( cd setuptools-rust-*
-  ex setuptools_rust/build.py << 'EOF'
-%s/"PYTHON_SYS_EXECUTABLE"/# &/
-%s/"PYO3_PYTHON"/# &/
-wq
-EOF
-  pip3.7 install .
-)
-python3.7 setup.py bdist_wheel
+pip3.7 install git+https://github.com/PyO3/setuptools-rust --no-build-isolation
 cd dist
 pip3.7 install tokenizers*.whl
 rm -fr $D
