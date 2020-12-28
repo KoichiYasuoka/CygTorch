@@ -11,6 +11,7 @@ esac
 D=/tmp/tokenizers$$
 mkdir $D
 cd $D
+V=${TOKENIZERS_VERSION-0.9.4}
 PATH="$D/.cargo/bin:$PATH"
 USERPROFILE="`cygpath -ad $D`"
 PYO3_PYTHON="`cygpath -ad /usr/bin/python3.7`"
@@ -20,9 +21,9 @@ export PATH USERPROFILE PYO3_PYTHON PYTHON_SYS_EXECUTABLE CXX
 curl -LO https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
 ./rustup-init.exe -y --no-modify-path --default-host "$C"-pc-windows-gnu --default-toolchain stable --profile minimal
-curl -LO https://github.com/huggingface/tokenizers/archive/python-v0.9.4.tar.gz
-tar xzf python-v0.9.4.tar.gz
-cd tokenizers-python-v0.9.4/bindings/python
+curl -LO https://github.com/huggingface/tokenizers/archive/python-v$V.tar.gz
+tar xzf python-v$V.tar.gz
+cd tokenizers-python-v$V/bindings/python
 cargo build --release
 ( B=`cygpath -ad /usr/bin | sed 's/\\\\/\\\\\\\\\\\\\\\\/g'`
   for PYO in $D/.cargo/registry/src/*/pyo3-0*
@@ -64,6 +65,7 @@ EOF
 rm -fr target/release/build/pyo3-* target/release/build/parking_lot-* target/release/build/onig_sys-*
 cargo build --release
 pip3.7 install git+https://github.com/PyO3/setuptools-rust --no-build-isolation
+python3.7 setup.py bdist_wheel
 cd dist
 pip3.7 install tokenizers*.whl
 rm -fr $D
