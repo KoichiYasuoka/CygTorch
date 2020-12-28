@@ -1,7 +1,7 @@
 #! /bin/sh -x
 # Transformers installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-numpy python37-wheel
-#   gcc-g++ git curl wget make cmake
+#   gcc-g++ mingw64-x86_64-gcc-g++ git curl make cmake
 case "`uname -a`" in
 *'x86_64 Cygwin') : ;;
 *) echo Only for Cygwin64 >&2

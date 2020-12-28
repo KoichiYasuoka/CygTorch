@@ -1,7 +1,7 @@
 #! /bin/sh
 # Pytokenizations installer for Cygwin, which requires:
 #   python37-devel python37-pip python37-wheel
-#   gcc-g++ git wget
+#   gcc-g++ git curl
 case "`uname -a`" in
 *'x86_64 Cygwin') C=x86_64 ;;
 *'i686 Cygwin') C=i686 ;;
@@ -15,10 +15,10 @@ PATH="$D/.cargo/bin:$PATH"
 USERPROFILE="`cygpath -ad $D`"
 PYTHON_SYS_EXECUTABLE="`cygpath -ad /usr/bin/python3.7`"
 export PATH USERPROFILE PYTHON_SYS_EXECUTABLE
-wget https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
+curl -LO https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
 ./rustup-init.exe -y --no-modify-path --default-host "$C"-pc-windows-gnu --default-toolchain nightly --profile minimal
-wget https://github.com/tamuhey/tokenizations/archive/python/0.6.0.tar.gz
+curl -LO https://github.com/tamuhey/tokenizations/archive/python/0.6.0.tar.gz
 tar xzf 0.6.0.tar.gz
 cd tokenizations-python*/python
 cargo build --release

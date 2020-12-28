@@ -1,6 +1,6 @@
 #! /bin/sh -x
 # JUMAN and KNP installer for Cygwin, which requires:
-#   gcc-g++ wget make zlib-devel
+#   gcc-g++ make curl zlib-devel
 case "`uname`" in
 CYGWIN*) CYGWIN=true ;;
 *) CYGWIN=false ;;
@@ -22,7 +22,7 @@ then if [ -x /usr/bin/juman -a -d /usr/lib/juman -a -s /usr/include/juman.h ]
                fi
           fi
      else cd $D
-	  wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/juman/juman-7.01.tar.bz2
+	  curl -LO http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/juman/juman-7.01.tar.bz2
 	  tar xjf juman-7.01.tar.bz2
 	  cd juman-7.01
 	  ./configure
@@ -35,7 +35,7 @@ then if [ -x /usr/bin/juman -a -d /usr/lib/juman -a -s /usr/include/juman.h ]
 fi
 if [ ! -x /usr/local/bin/knp ]
 then cd $D
-     wget http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/knp-4.19.tar.bz2
+     curl -LO http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/knp-4.19.tar.bz2
      tar xjf knp-4.19.tar.bz2
      cd knp-4.19/CRF++-0.58
      if egrep '^#ifndef __CYGWIN__' winmain.h
@@ -53,7 +53,7 @@ EOF
      cd ../dict/ebcf
      if [ ! -s noun.idx ]
      then for F in noun.idx.xz noun.dat.xz.1 noun.dat.xz.2
-          do wget https://github.com/KoichiYasuoka/knp-cygwin64/raw/master/share/knp/dict/ebcf/$F
+          do curl -LO https://github.com/KoichiYasuoka/knp-cygwin64/raw/master/share/knp/dict/ebcf/$F
           done
           cat noun.dat.xz.[12] > noun.dat.xz
           touch noun.idx.xz
@@ -61,7 +61,7 @@ EOF
      fi
      if [ ! -s cf.idx ]
      then for F in cf.idx.xz cf.dat.xz.1 cf.dat.xz.2
-          do wget https://github.com/KoichiYasuoka/knp-cygwin64/raw/master/share/knp/dict/ebcf/$F
+          do curl -LO https://github.com/KoichiYasuoka/knp-cygwin64/raw/master/share/knp/dict/ebcf/$F
           done
           cat cf.dat.xz.[12] > cf.dat.xz
           touch cf.idx.xz
