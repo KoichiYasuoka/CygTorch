@@ -10,7 +10,8 @@ case "`uname -a`" in
 esac
 ALLENNLP_VERSION=1.3.0
 TOKENIZERS_VERSION=0.9.4
-export ALLENNLP_VERSION TOKENIZERS_VERSION
+TRANSFORMERS_VERSION=3.5.1
+export ALLENNLP_VERSION TOKENIZERS_VERSION TRANSFORMERS_VERSION
 pip3.7 list |
 ( egrep '^allennlp +'$ALLENNLP_VERSION ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/allennlp.sh | sh -x
@@ -29,9 +30,7 @@ fi
 pip3.7 list |
 ( if egrep '^en-udify +0.7'
   then :
-  else V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
-       W=`pip3.7 list | sed -n 's/^transformers  *\([^ ]*\) *$/\1/p'`
-       pip3.7 install tokenizers==$V transformers==$W https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.7.0/en_udify-0.7.tar.gz 'camphr>=0.7.2'
+  else pip3.7 install tokenizers==$TOKENIZERS_VERSION transformers==$TRANSFORMERS_VERSION https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.7.0/en_udify-0.7.tar.gz 'camphr>=0.7.2'
   fi
 )
 ex -s /usr/lib/python3.7/site-packages/udify/modules/bert_pretrained.py << 'EOF'

@@ -23,9 +23,15 @@ pip3.7 list |
 ( egrep '^tokenizers +'$TOKENIZERS_VERSION ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/tokenizers.sh | sh -x
 )
-V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
+V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/tokenizers==\1/p'`
 case "$ALLENNLP_VERSION" in
-'') pip3.7 install tokenizers==$V allennlp 'spacy>=2.2.2' 'sentencepiece>=0.1.94' ;;
-*) pip3.7 install tokenizers==$V allennlp==$ALLENNLP_VERSION 'spacy>=2.2.2' 'sentencepiece>=0.1.94' ;;
+'') A=allennlp ;;
+*) A=allennlp==$ALLENNLP_VERSION ;;
+esac
+case "$TRANSFORMERS_VERSION" in
+'') T='' ;;
+*) T="transformers==$TRANSFORMERS_VERSION" ;;
+esac
+pip3.7 install $V $A $T 'spacy>=2.2.2' 'sentencepiece>=0.1.94'
 esac
 exit 0
