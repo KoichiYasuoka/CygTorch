@@ -33,5 +33,4 @@ case "$TRANSFORMERS_VERSION" in
 *) T="transformers==$TRANSFORMERS_VERSION" ;;
 esac
 pip3.7 install $V $A $T 'spacy>=2.2.2' 'sentencepiece>=0.1.94'
-esac
 exit 0
