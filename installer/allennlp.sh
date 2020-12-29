@@ -12,10 +12,6 @@ pip3.7 install -U cython wheel pybind11 mecab-cygwin
 pip3.7 install 'spacy>=2.2.2' scipy --no-build-isolation
 pip3.7 install torch -f https://github.com/KoichiYasuoka/CygTorch
 pip3.7 list |
-( egrep '^sentencepiece ' ||
-  curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/sentencepiece.sh | sh -x
-)
-pip3.7 list |
 ( egrep '^h5py ' ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/h5py.sh | sh -x
 )
@@ -24,9 +20,12 @@ pip3.7 list |
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/gevent.sh | sh -x
 )
 pip3.7 list |
-( egrep '^tokenizers ' ||
+( egrep '^tokenizers +'$TOKENIZERS_VERSION ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/tokenizers.sh | sh -x
 )
 V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
-pip3.7 install tokenizers==$V allennlp 'spacy>=2.2.2'
+case "$ALLENNLP_VERSION" in
+'') pip3.7 install tokenizers==$V allennlp 'spacy>=2.2.2'
+*) pip3.7 install tokenizers==$V allennlp==$ALLENNLP_VERSION 'spacy>=2.2.2'
+esac
 exit 0

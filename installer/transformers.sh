@@ -9,11 +9,7 @@ case "`uname -a`" in
 esac
 pip3.7 install torch -f https://github.com/KoichiYasuoka/CygTorch
 pip3.7 list |
-( egrep '^sentencepiece ' ||
-  curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/sentencepiece.sh | sh -x
-)
-pip3.7 list |
-( egrep '^tokenizers ' ||
+( egrep '^tokenizers +'$TOKENIZERS_VERSION ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/tokenizers.sh | sh -x
 )
 V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`

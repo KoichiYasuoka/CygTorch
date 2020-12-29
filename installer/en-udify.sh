@@ -8,15 +8,14 @@ case "`uname -a`" in
 *) echo Only for Cygwin64 >&2
    exit 2 ;;
 esac
+ALLENNLP_VERSION=1.2.2
+TOKENIZERS_VERSION=0.9.3
+export ALLENNLP_VERSION TOKENIZERS_VERSION
 pip3.7 list |
-( egrep '^allennlp ' ||
+( egrep '^allennlp +'$ALLENNLP_VERSION ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/allennlp.sh | sh -x
 )
 pip3.7 install pyahocorasick@git+https://github.com/KoichiYasuoka/pyahocorasick
-pip3.7 list |
-( egrep '^tokenizers ' ||
-  curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/tokenizers.sh | sh -x
-)
 if [ -x /usr/lib/python3.7/site-packages/tokenizations/tokenizations*.dll ]
 then :
 else pip3.7 uninstall pytokenizations
@@ -28,7 +27,7 @@ else pip3.7 uninstall pytextspan
      curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/pytextspan.sh | sh -x
 fi
 pip3.7 list |
-( if egrep '^en-udify '
+( if egrep '^en-udify +0.7'
   then :
   else V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
        pip3.7 install tokenizers==$V  https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.7.0/en_udify-0.7.tar.gz 'camphr>=0.7'
@@ -36,7 +35,7 @@ pip3.7 list |
 )
 python3.7 -c '
 import spacy
-ud=spacy.load("en_udify")
+nlp=spacy.load("en_udify")
 quit()
 '
 exit 0
