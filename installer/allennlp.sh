@@ -25,7 +25,7 @@ pip3.7 list |
 )
 V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
 case "$ALLENNLP_VERSION" in
-'') pip3.7 install tokenizers==$V allennlp 'spacy>=2.2.2'
-*) pip3.7 install tokenizers==$V allennlp==$ALLENNLP_VERSION 'spacy>=2.2.2'
+'') pip3.7 install tokenizers==$V allennlp 'spacy>=2.2.2' ;;
+*) pip3.7 install tokenizers==$V allennlp==$ALLENNLP_VERSION 'spacy>=2.2.2' ;;
 esac
 exit 0
