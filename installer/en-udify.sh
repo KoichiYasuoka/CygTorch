@@ -30,7 +30,7 @@ fi
 pip3.7 list |
 ( if egrep '^en-udify +0.7'
   then :
-  else pip3.7 install tokenizers==$TOKENIZERS_VERSION transformers==$TRANSFORMERS_VERSION https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.7.0/en_udify-0.7.tar.gz 'camphr>=0.7.2' 'sentencepiece>=0.1.94'
+  else pip3.7 install tokenizers==$TOKENIZERS_VERSION transformers==$TRANSFORMERS_VERSION https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.7.0/en_udify-0.7.tar.gz 'camphr>=0.7.2' 'unofficial-udify>=0.3.0' 'sentencepiece>=0.1.94'
   fi
 )
 python3.7 -c '
