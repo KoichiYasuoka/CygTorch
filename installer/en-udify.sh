@@ -33,6 +33,10 @@ pip3.7 list |
        pip3.7 install tokenizers==$V https://github.com/PKSHATechnology-Research/camphr_models/releases/download/0.7.0/en_udify-0.7.tar.gz 'camphr>=0.7.2'
   fi
 )
+ex -s /usr/lib/python3.7/site-packages/udify/modules/bert_pretrained.py << 'EOF'
+%s/ allennlp.data.tokenizers.token / allennlp.data.tokenizers /
+wq
+EOF
 python3.7 -c '
 import spacy
 nlp=spacy.load("en_udify")
