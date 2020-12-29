@@ -9,7 +9,7 @@ case "`uname -a`" in
    exit 2 ;;
 esac
 ALLENNLP_VERSION=1.2.2
-TOKENIZERS_VERSION=0.9.3
+TOKENIZERS_VERSION=0.9.2
 export ALLENNLP_VERSION TOKENIZERS_VERSION
 pip3.7 list |
 ( egrep '^allennlp +'$ALLENNLP_VERSION ||
