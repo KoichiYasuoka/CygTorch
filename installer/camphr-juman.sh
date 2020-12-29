@@ -12,12 +12,12 @@ if [ ! -x /usr/local/bin/knp ]
 then pip3.7 install knp-cygwin64@git+https://github.com/KoichiYasuoka/knp-cygwin64
 fi
 pip3.7 list |
-( egrep '^allennlp ' ||
+( egrep '^allennlp +'$ALLENNLP_VERSION ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/allennlp.sh | sh -x
 )
 pip3.7 install pyahocorasick@git+https://github.com/KoichiYasuoka/pyahocorasick
 pip3.7 list |
-( egrep '^tokenizers ' ||
+( egrep '^tokenizers +'$TOKENIZERS_VERSION ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/tokenizers.sh | sh -x
 )
 if [ -x /usr/lib/python3.7/site-packages/tokenizations/tokenizations*.dll ]
