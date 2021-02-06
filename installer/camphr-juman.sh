@@ -15,7 +15,6 @@ pip3.7 list |
 ( egrep '^allennlp +'$ALLENNLP_VERSION ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/allennlp.sh | sh -x
 )
-pip3.7 install pyahocorasick@git+https://github.com/KoichiYasuoka/pyahocorasick
 pip3.7 list |
 ( egrep '^tokenizers +'$TOKENIZERS_VERSION ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/tokenizers.sh | sh -x

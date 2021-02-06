@@ -16,7 +16,6 @@ pip3.7 list |
 ( egrep '^allennlp +'$ALLENNLP_VERSION ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/allennlp.sh | sh -x
 )
-pip3.7 install pyahocorasick@git+https://github.com/KoichiYasuoka/pyahocorasick
 if [ -x /usr/lib/python3.7/site-packages/tokenizations/tokenizations*.dll ]
 then :
 else pip3.7 uninstall pytokenizations
