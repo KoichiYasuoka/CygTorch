@@ -24,6 +24,15 @@ chmod u+x rustup-init.exe
 curl -LO https://github.com/huggingface/tokenizers/archive/python-v$V.tar.gz
 tar xzf python-v$V.tar.gz
 cd tokenizers-python-v$V/bindings/python
+( B=`cygpath -ad /usr/bin/cygpath | sed 's/\\\\/\\\\\\\\/g'`
+  echo /fn from_file/a
+  echo '        use std::process::Command;'
+  echo '        let output = Command::new("'$B'").args(&["-ad",path]).output().expect("failed to execute cygpath");'
+  echo '        let cygpath = String::from_utf8(output.stdout)?;'
+  echo '        let path: &str = &cygpath.trim();'
+  echo .
+  echo wq
+) | ex -s src/tokenizer.rs
 cargo build --release
 ( B=`cygpath -ad /usr/bin | sed 's/\\\\/\\\\\\\\\\\\\\\\/g'`
   for PYO in $D/.cargo/registry/src/*/pyo3-0*
