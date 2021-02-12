@@ -1,7 +1,7 @@
 #! /bin/sh -x
 # AllenNLP installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-numpy python37-cffi
-#   gcc-g++ mingw64-x86_64-gcc-g++ gcc-fortran git curl make cmake
+#   gcc-g++ mingw64-x86_64-gcc-g++ gcc-fortran git curl make cmake patch
 #   libopenblas liblapack-devel libhdf5-devel libfreetype-devel libuv-devel
 case "`uname -a`" in
 *'x86_64 Cygwin') : ;;
