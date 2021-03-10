@@ -15,5 +15,5 @@ pip3.7 list |
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/tokenizers.sh | sh -x
 )
 V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
-pip3.7 install tokenizers==$V supar@git+https://github.com/yzhangcs/parser
+pip3.7 install tokenizers==$V supar@git+https://github.com/KoichiYasuoka/SuPar
 exit 0
