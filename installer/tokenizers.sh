@@ -11,13 +11,14 @@ esac
 D=/tmp/tokenizers$$
 mkdir $D
 cd $D
-V=${TOKENIZERS_VERSION-0.9.4}
+V=${TOKENIZERS_VERSION-0.10.2}
 PATH="$D/.cargo/bin:$PATH"
 USERPROFILE="`cygpath -ad $D`"
 PYO3_PYTHON="`cygpath -ad /usr/bin/python3.7`"
 PYTHON_SYS_EXECUTABLE="$PYO3_PYTHON"
+CC=$C-w64-mingw32-gcc.exe
 CXX=$C-w64-mingw32-g++.exe
-export PATH USERPROFILE PYO3_PYTHON PYTHON_SYS_EXECUTABLE CXX
+export PATH USERPROFILE PYO3_PYTHON PYTHON_SYS_EXECUTABLE CC CXX
 curl -LO https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
 ./rustup-init.exe -y --no-modify-path --default-host "$C"-pc-windows-gnu --default-toolchain stable --profile minimal
@@ -33,6 +34,13 @@ cd tokenizers-python-v$V/bindings/python
   echo .
   echo wq
 ) | ex -s src/tokenizer.rs
+( echo 1a
+  echo ''
+  echo import os
+  echo 'os.environ["PATH"] += ":/usr/'$C'-w64-mingw32/sys-root/mingw/bin"'
+  echo .
+  echo wq
+) | ex -s py_src/tokenizers/__init__.py
 cargo build --release
 ( B=`cygpath -ad /usr/bin | sed 's/\\\\/\\\\\\\\\\\\\\\\/g'`
   for PYO in $D/.cargo/registry/src/*/pyo3-0*
