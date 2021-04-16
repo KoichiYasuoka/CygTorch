@@ -7,7 +7,7 @@ case "`uname -a`" in
 *) echo Only for Cygwin64 >&2
    exit 2 ;;
 esac
-TOKENIZERS_VERSION=0.9.4
+TOKENIZERS_VERSION=0.10.2
 export TOKENIZERS_VERSION
 pip3.7 install torch -f https://github.com/KoichiYasuoka/CygTorch
 pip3.7 list |
