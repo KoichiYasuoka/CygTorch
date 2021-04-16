@@ -73,7 +73,7 @@ EOF
 )
 rm -fr target/release/build/pyo3-* target/release/build/parking_lot-* target/release/build/onig_sys-*
 cargo build --release
-pip3.7 install git+https://github.com/PyO3/setuptools-rust --no-build-isolation
+pip3.7 install 'setuptools-rust>=0.12.1' --no-build-isolation
 python3.7 setup.py bdist_wheel
 cd dist
 pip3.7 install tokenizers*.whl
