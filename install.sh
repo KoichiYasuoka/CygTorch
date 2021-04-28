@@ -1,5 +1,5 @@
 #! /bin/sh -x
-# PyTorch 1.6.0 installer for Cygwin64, which requires:
+# PyTorch 1.7.1 installer for Cygwin64, which requires:
 #   python37-devel python37-pip python37-cython python37-numpy python37-wheel
 #   gcc-g++ git make cmake
 case "`uname -a`" in
@@ -13,7 +13,7 @@ then echo CygTorch: already installed >&2
 fi
 case "$1" in
 --no-compile) cd dist
-              exec pip3.7 install torch-1.6.0+cpu-py37-none-any.whl ;;
+              exec pip3.7 install torch-1.7.1+cpu-py37-none-any.whl ;;
 esac
 cd /etc/setup
 F=true
@@ -27,16 +27,17 @@ if $F
 then :
 else exit 2
 fi
-cd /tmp
+cd /
 PY_MAJOR_VERSION=3
-PYTORCH_BUILD_VERSION=1.6.0+cpu
+PYTORCH_BUILD_VERSION=1.7.1+cpu
 PYTORCH_BUILD_NUMBER=0
-export PY_MAJOR_VERSION PYTORCH_BUILD_VERSION PYTORCH_BUILD_NUMBER
-if [ ! -d pytorch1.6.0 ]
-then git clone -b v1.6.0 --depth=1 https://github.com/pytorch/pytorch
-     mv pytorch pytorch1.6.0
+Fortran=gfortran
+export PY_MAJOR_VERSION PYTORCH_BUILD_VERSION PYTORCH_BUILD_NUMBER Fortran
+if [ ! -d pytorch1.7.1 ]
+then git clone -b v1.7.1 --depth=1 https://github.com/pytorch/pytorch
+     mv pytorch pytorch1.7.1
 fi
-cd pytorch1.6.0
+cd pytorch1.7.1
 P=`pwd`
 if [ ! -d build ]
 then pip3.7 install -r requirements.txt
@@ -58,7 +59,7 @@ EOF
      )
      mkdir build
      cd build 
-     cmake .. `python3.7 ../scripts/get_python_cmake_flags.py` -DCYGWIN=ON -DBUILD_CAFFE2_OPS=OFF -DBUILD_PYTHON=ON -DBUILD_SHARED_LIBS=ON -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DINTERN_BUILD_MOBILE=OFF -DCMAKE_INSTALL_PREFIX=$P/torch -DCMAKE_PREFIX_PATH=/usr/lib/python3.7/site-packages -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-lpython3.7 -DNUMPY_INCLUDE_DIR=/usr/lib/python3.7/site-packages/numpy/core/include -DPYTHON_LIBRARY=/usr/lib/libpython3.7m.dll.a -DTORCH_BUILD_VERSION=1.6.0+cpu -DUSE_CUDA=OFF -DUSE_FBGEMM=OFF -DUSE_MKLDNN=OFF -DUSE_NUMPY=ON -DNDEBUG=ON
+     cmake .. `python3.7 ../scripts/get_python_cmake_flags.py` -DCYGWIN=ON -DBUILD_CAFFE2_OPS=OFF -DBUILD_PYTHON=ON -DBUILD_SHARED_LIBS=ON -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DINTERN_BUILD_MOBILE=OFF -DCMAKE_INSTALL_PREFIX=$P/torch -DCMAKE_PREFIX_PATH=/usr/lib/python3.7/site-packages -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-lpython3.7 -DNUMPY_INCLUDE_DIR=/usr/lib/python3.7/site-packages/numpy/core/include -DPYTHON_LIBRARY=/usr/lib/libpython3.7m.dll.a -DTORCH_BUILD_VERSION=1.7.1+cpu -DUSE_CUDA=OFF -DUSE_FBGEMM=OFF -DUSE_MKLDNN=OFF -DUSE_NUMPY=ON -DUSE_DISTRIBUTED=ON -DUSE_MPI=ON -DUSE_GLOO=OFF -DUSE_TENSORPIPE=OFF -DNDEBUG=ON
      cd ..
 fi
 awk '
@@ -140,5 +141,5 @@ EOF
 fi
 python3.7 setup.py bdist_wheel
 cd dist
-pip3.7 install -U --no-deps torch-1.6.0*.whl
+pip3.7 install -U --no-deps torch-1.7.1*.whl
 exit 0

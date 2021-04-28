@@ -1,6 +1,6 @@
 # CygTorch
 
-[PyTorch](https://github.com/pytorch/pytorch) 1.6.0 installer for [Cygwin64](https://www.cygwin.com/).
+[PyTorch](https://github.com/pytorch/pytorch) 1.7.1 installer for [Cygwin64](https://www.cygwin.com/).
 
 ## Usage
 
