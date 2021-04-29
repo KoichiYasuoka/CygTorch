@@ -21,6 +21,7 @@ sh -x ./install.sh --no-compile
 
 * [torch-1.7.1+cpu-py38-none-any.whl](https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/dist/torch-1.7.1+cpu-py38-none-any.whl)
 * [torch-1.7.1+cpu-py37-none-any.whl](https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/dist/torch-1.7.1+cpu-py37-none-any.whl)
+* [torch-1.7.1+cpu-py36-none-any.whl](https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/dist/torch-1.7.1+cpu-py36-none-any.whl)
 * [torch-1.6.0+cpu-py38-none-any.whl](https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/dist/torch-1.6.0+cpu-py38-none-any.whl)
 * [torch-1.6.0+cpu-py37-none-any.whl](https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/dist/torch-1.6.0+cpu-py37-none-any.whl)
 * [torch-1.6.0+cpu-py36-none-any.whl](https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/dist/torch-1.6.0+cpu-py36-none-any.whl)
