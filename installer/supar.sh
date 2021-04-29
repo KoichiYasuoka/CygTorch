@@ -9,11 +9,10 @@ case "`uname -a`" in
 esac
 TOKENIZERS_VERSION=0.10.2
 export TOKENIZERS_VERSION
-pip3.7 install torch -f https://github.com/KoichiYasuoka/CygTorch
 pip3.7 list |
 ( egrep '^tokenizers +'$TOKENIZERS_VERSION ||
   curl https://raw.githubusercontent.com/KoichiYasuoka/CygTorch/master/installer/tokenizers.sh | sh -x
 )
 V=`pip3.7 list | sed -n 's/^tokenizers  *\([^ ]*\) *$/\1/p'`
-pip3.7 install tokenizers==$V supar
+pip3.7 install tokenizers==$V supar -f https://github.com/KoichiYasuoka/CygTorch
 exit 0
