@@ -27,7 +27,7 @@ if $F
 then :
 else exit 2
 fi
-cd /
+cd /tmp
 PY_MAJOR_VERSION=3
 PYTORCH_BUILD_VERSION=1.7.1+cpu
 PYTORCH_BUILD_NUMBER=0
@@ -59,7 +59,7 @@ EOF
      )
      mkdir build
      cd build 
-     cmake .. `python3.7 ../scripts/get_python_cmake_flags.py` -DCYGWIN=ON -DBUILD_CAFFE2_OPS=OFF -DBUILD_PYTHON=ON -DBUILD_SHARED_LIBS=ON -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DINTERN_BUILD_MOBILE=OFF -DCMAKE_INSTALL_PREFIX=$P/torch -DCMAKE_PREFIX_PATH=/usr/lib/python3.7/site-packages -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-lpython3.7 -DNUMPY_INCLUDE_DIR=/usr/lib/python3.7/site-packages/numpy/core/include -DPYTHON_LIBRARY=/usr/lib/libpython3.7m.dll.a -DTORCH_BUILD_VERSION=1.7.1+cpu -DUSE_CUDA=OFF -DUSE_FBGEMM=OFF -DUSE_MKLDNN=OFF -DUSE_NUMPY=ON -DUSE_DISTRIBUTED=ON -DUSE_MPI=ON -DUSE_GLOO=OFF -DUSE_TENSORPIPE=OFF -DNDEBUG=ON
+     cmake .. `python3.7 ../scripts/get_python_cmake_flags.py` -DCYGWIN=ON -DBUILD_CAFFE2_OPS=OFF -DBUILD_PYTHON=ON -DBUILD_SHARED_LIBS=ON -DBUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DINTERN_BUILD_MOBILE=OFF -DCMAKE_INSTALL_PREFIX=$P/torch -DCMAKE_PREFIX_PATH=/usr/lib/python3.7/site-packages -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-lpython3.7 -DNUMPY_INCLUDE_DIR=/usr/lib/python3.7/site-packages/numpy/core/include -DPYTHON_LIBRARY=/usr/lib/libpython3.7m.dll.a -DTORCH_BUILD_VERSION=1.7.1+cpu -DUSE_CUDA=OFF -DUSE_FBGEMM=OFF -DUSE_MKLDNN=OFF -DUSE_NUMPY=ON -DNDEBUG=ON
      cd ..
 fi
 awk '
