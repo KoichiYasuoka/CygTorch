@@ -7,7 +7,7 @@ case "`uname -a`" in
 *) echo Only for Cygwin64 >&2
    exit 2 ;;
 esac
-TOKENIZERS_VERSION=0.10.2
+TOKENIZERS_VERSION=0.10.3
 export TOKENIZERS_VERSION
 pip3.7 list |
 ( egrep '^tokenizers +'$TOKENIZERS_VERSION ||
