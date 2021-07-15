@@ -11,7 +11,7 @@ esac
 D=/tmp/tokenizers$$
 mkdir $D
 cd $D
-V=${TOKENIZERS_VERSION-0.10.2}
+V=${TOKENIZERS_VERSION-0.10.3}
 PATH="$D/.cargo/bin:$PATH"
 USERPROFILE="`cygpath -ad $D`"
 PYO3_PYTHON="`cygpath -ad /usr/bin/python3.7`"
