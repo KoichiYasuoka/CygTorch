@@ -41,6 +41,14 @@ cd tokenizers-python-v$V/bindings/python
   echo .
   echo wq
 ) | ex -s py_src/tokenizers/__init__.py
+( echo /lexical-core/
+  echo +
+  echo 's/version = .*$/version = "0.7.6"/'
+  echo +
+  echo +
+  echo 's/checksum = .*$/checksum = "6607c62aa161d23d17a9072cc5da0be67cdfc89d3afb1e8d9c842bebc2525ffe"/'
+  echo wq
+) | ex -s Cargo.lock
 cargo build --release
 ( B=`cygpath -ad /usr/bin | sed 's/\\\\/\\\\\\\\\\\\\\\\/g'`
   for PYO in $D/.cargo/registry/src/*/pyo3-0*
