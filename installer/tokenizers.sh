@@ -21,7 +21,7 @@ CXX=$C-w64-mingw32-g++.exe
 export PATH USERPROFILE PYO3_PYTHON PYTHON_SYS_EXECUTABLE CC CXX
 curl -LO https://static.rust-lang.org/rustup/dist/"$C"-pc-windows-gnu/rustup-init.exe
 chmod u+x rustup-init.exe
-./rustup-init.exe -y --no-modify-path --default-host "$C"-pc-windows-gnu --default-toolchain stable --profile minimal
+./rustup-init.exe -y --no-modify-path --default-host "$C"-pc-windows-gnu --default-toolchain 1.61.0 --profile minimal
 curl -LO https://github.com/huggingface/tokenizers/archive/python-v$V.tar.gz
 tar xzf python-v$V.tar.gz
 cd tokenizers-python-v$V/bindings/python
