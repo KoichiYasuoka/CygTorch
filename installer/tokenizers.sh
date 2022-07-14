@@ -24,6 +24,11 @@ chmod u+x rustup-init.exe
 ./rustup-init.exe -y --no-modify-path --default-host "$C"-pc-windows-gnu --default-toolchain 1.61.0 --profile minimal
 curl -LO https://github.com/huggingface/tokenizers/archive/python-v$V.tar.gz
 tar xzf python-v$V.tar.gz
+find tokenizers-python-v$V -name rust-toolchain |
+( while read F
+  do echo 1.61.0 > $F
+  done
+)
 cd tokenizers-python-v$V/bindings/python
 ( B=`cygpath -ad /usr/bin/cygpath | sed 's/\\\\/\\\\\\\\/g'`
   echo /fn from_file/a
